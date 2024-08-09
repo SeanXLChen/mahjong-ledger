@@ -152,7 +152,7 @@ export default function AccountForm({ user }: { user: User | null }) {
                             >
                                 {loading ? 'Loading ...' : 'Update'}
                             </button>
-                            <form action="/auth/signout" method="post" className="w-full">
+                            <form action="/signout" method="post" className="w-full">
                                 <button
                                     type="submit"
                                     className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition"

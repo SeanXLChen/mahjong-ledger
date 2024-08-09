@@ -11,10 +11,10 @@ const navLinks = [
 const NavBar = () => {
     return (
         <>
-            <nav className="flex justify-center space-x-4">
+            <nav role="tablist" className="tabs tabs-boxed">
                 {
                     navLinks.map((link) => (
-                        <Link key={link.href} href={link.href} className={`text-lg text-blue-800 hover:underline ${usePathname() === link.href ? "text-blue-400" : ""}`}>
+                        <Link key={link.href} href={link.href} role="tab" className={`tab ${usePathname() === link.href ? "tab-active" : ""}`}>
                             {link.label}
                         </Link>
                     ))

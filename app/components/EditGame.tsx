@@ -28,6 +28,23 @@ export default function EditGame({game}: {game: Game}) {
 
     const handleChange = (e) => setFormData({...formData, [e.target.name]: e.target.value})
 
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setLoading(true);
+
+        const formData = new FormData(event.currentTarget);
+        const response = await updateGame(formData);
+
+        setLoading(false);
+
+        if (response && response.message) {
+            alert(response.message);
+        } else {
+            alert("An error occurred. Please try again.");
+        }
+    };
 
     return (
         <div>
