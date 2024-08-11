@@ -18,11 +18,11 @@ export default function RootLayout({
   return (
     <html data-theme="emerald" lang="en">
       <body className={`${inter.className} text-gray-700`}>
-        <header className="container mx-auto p-6 sm:p-12 text-center">
+        <header className="container mx-auto px-6 sm:px-12 text-center">
           <h1 className="text-3xl md:text-6xl font-extrabold mb-6">Mahjong Scorer</h1>
           <NavBar />
         </header>
-        <main className="container mx-auto p-6 sm:p-12">
+        <main className="container mx-auto px-6 sm:px-12 py-2">
           {children}
         </main>
       </body>

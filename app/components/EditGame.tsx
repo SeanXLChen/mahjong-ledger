@@ -48,7 +48,7 @@ export default function EditGame({game}: {game: Game}) {
 
     return (
         <div>
-            <button onClick={() => setShowModal(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={() => setShowModal(true)} className="btn btn-sm btn-info">
                 Edit
             </button>
             {showModal && (

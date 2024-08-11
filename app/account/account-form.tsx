@@ -77,21 +77,16 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
 
     return (
-        <div className="flex flex-col w-11/12 md:w-1/2 mx-auto min-h-screen bg-gray-900 text-gray-300 relative">
+        <div className="flex flex-col w-11/12 mx-auto min-h-screen relative">
             <div className="container mx-auto p-6 sm:p-12">
                 <div className="flex mx-auto">
                     <div className="flex justify-between items-center gap-2 min-w-full">
-                        <Link href="/">
-                            <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                Back to App
-                            </button>
-                        </Link>
-                        <h1 className="flex text-3xl md:text-6xl font-extrabold text-white mb-6">
+                        <h1 className="flex text-3xl md:text-6xl font-extrabold mb-6">
                             My Profile
                         </h1>
                     </div>
                 </div>
-                <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div className="p-6 rounded-lg shadow-lg">
                     <div className="text-center mb-6">
                         <Avatar
                             uid={user?.id ?? null}
