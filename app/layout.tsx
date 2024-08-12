@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,55 @@ export default function RootLayout({
     <html data-theme="emerald" lang="en">
       <body className={`${inter.className} text-gray-700`}>
         <header className="container mx-auto px-6 sm:px-12 text-center">
-          <h1 className="text-3xl md:text-6xl font-extrabold mb-6">Mahjong Scorer</h1>
-          <NavBar />
+          {/* Symbols displayed based on screen size */}
+          <p className="text-3xl mb-3 mt-1">
+            {/* Small screens (sm) */}
+            <span className="block sm:hidden">
+              &#x1F007;
+              &#x1F008;
+              &#x1F009;
+              &#x1F00A;
+              &#x1F00B;
+              &#x1F00C;
+              &#x1F00D;
+              &#x1F00E;
+              &#x1F00F;
+            </span>
+            {/* Medium screens (md) */}
+            <span className="hidden sm:block md:hidden">
+              &#x1F007;
+              &#x1F008;
+              &#x1F009;
+              &#x1F00A;
+              &#x1F00B;
+              &#x1F00C;
+              &#x1F00D;
+              &#x1F00E;
+              &#x1F00F;
+              &#x1F000;
+              &#x1F001;
+              &#x1F002;
+              &#x1F003;
+            </span>
+            {/* Large screens (lg and up) */}
+            <span className="hidden md:block">
+              &#x1F007; &#x1F008; &#x1F009; &#x1F00A; &#x1F00B;
+
+              &#x1F010; &#x1F011; &#x1F012; &#x1F013;
+              &#x1F014;
+              &#x1F019;
+              &#x1F01A; &#x1F01B; &#x1F01C; &#x1F01D;
+              &#x1F000; &#x1F001; &#x1F002; &#x1F003;
+              &#x1F005;
+            </span>
+
+          </p>
+
+          {/* <Link href="/">
+            <h1 className="text-3xl md:text-5xl font-extrabold mb-6 object-center">Mahjong Scorer</h1>
+          </Link> */}
+
+
         </header>
         <main className="container mx-auto px-6 sm:px-12 py-2">
           {children}
