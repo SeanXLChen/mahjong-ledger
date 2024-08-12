@@ -67,7 +67,23 @@ export default async function GameDetails({
 
                                 <div className="grid grid-cols-4 gap-4 place-items-center">
                                     {/* Render player score details */}
-                                    {/* Your player score details here */}
+                                    {["player1", "player2", "player3", "player4"].map((player, index) => (
+                                        <section key={index} className='flex flex-col items-center'>
+                                            <div className="avatar placeholder">
+                                                <div className={score[`${player}_score`] < 0 ? "bg-neutral text-neutral-content w-24 rounded-md ring-error ring-offset-base-100 ring ring-offset-2" : "bg-neutral text-neutral-content w-24 rounded-md ring-primary ring-offset-base-100 ring ring-offset-2"}>
+                                                    <div className="text-3xl">{score[`${player}_name`]?.substring(0, 4)}</div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className={score[`${player}_score`] < 0 ?
+                                                    "text-2xl text-error mt-1" : "text-2xl text-success mt-1"
+                                                }>
+                                                    {score[`${player}_score`]}
+                                                </div>
+                                            </div>
+                                        </section>
+                                    ))}
                                 </div>
                             </div>
                         ))}

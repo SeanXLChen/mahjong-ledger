@@ -45,7 +45,7 @@ const SummaryBar = async (
 
     return (
         <div>
-            <div key={score.game_id} className="p-2 m-2 rounded-lg shadow-md border-gray-100 bg-gray-50">
+            <div key={score.game_id} className="p-2 m-2 rounded-lg border-gray-900 border-spacing-1 bg-gray-200">
                 <div className='flex flex-col justify-items-center'>
                     <section className='flex justify-between'>
                         <p className="text-xl text-center w-1/3"></p>
