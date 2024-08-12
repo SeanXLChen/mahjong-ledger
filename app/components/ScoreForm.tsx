@@ -3,13 +3,33 @@
 import { useState } from "react";
 import { addScore } from "../server-action/addScore";
 import { usePathname } from "next/navigation";
-import { GameItem } from "util/types";
 
-export default function ScoreForm(
-    { data }: { data: GameItem }
-) {
+type GameItem = {
+    id: number,
+    user_id: string,
+    game_name: string,
+    player1_name: string,
+    player2_name: string,
+    player3_name: string,
+    player4_name: string,
+    created_at: string,
+};
+
+type Score = {
+    score: number;
+    result: string;
+};
+
+type Scores = {
+    player1: Score;
+    player2: Score;
+    player3: Score;
+    player4: Score;
+};
+
+export default function ScoreForm({ data }: { data: GameItem }) {
     const [showModal, setShowModal] = useState(false);
-    const initialScores = {
+    const initialScores: Scores = {
         player1: { score: 0, result: "win" },
         player2: { score: 0, result: "win" },
         player3: { score: 0, result: "win" },
@@ -20,7 +40,7 @@ export default function ScoreForm(
     const game = usePathname();
     const gameId = game.split('/')[2];
 
-    const handleScoreChange = (player, field, value) => {
+    const handleScoreChange = (player: keyof Scores, field: keyof Score, value: number) => {
         let newValue = value;
 
         if (field === "score" && scores[player].result === "lose" && newValue > 0) {
@@ -33,7 +53,7 @@ export default function ScoreForm(
         }));
     };
 
-    const handleResultChange = (player, result) => {
+    const handleResultChange = (player: keyof Scores, result: string) => {
         setScores((prev) => {
             let score = prev[player].score;
 
@@ -50,10 +70,10 @@ export default function ScoreForm(
         });
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent the default form submission behavior
 
-        await addScore(new FormData(event.target)); // Submit the form data to the server
+        await addScore(new FormData(event.currentTarget)); // Submit the form data to the server
 
         setScores(initialScores); // Reset the form fields
         setShowModal(false); // Close the modal after submission
@@ -83,7 +103,7 @@ export default function ScoreForm(
                                     <div className="avatar placeholder">
                                         <div className="bg-neutral text-neutral-content w-12 rounded-md">
                                             <div className="text-xl">
-                                                {data ? data[`${player}_name`].substring(0, 2) : player.charAt(0).toUpperCase()}
+                                            {data ? (data[`${player}_name` as keyof GameItem] as string)?.substring(0, 2) : player.charAt(0).toUpperCase()}
                                             </div>
                                         </div>
                                     </div>
@@ -95,8 +115,8 @@ export default function ScoreForm(
                                             id={`${player}-win`}
                                             name={`${player}-result`}
                                             value="win"
-                                            checked={scores[player].result === "win"}
-                                            onChange={(e) => handleResultChange(player, e.target.value)}
+                                            checked={scores[`player${index + 1}` as keyof Scores].result === "win"}
+                                            onChange={(e) => handleResultChange(`player${index + 1}` as keyof Scores, e.target.value)}
                                             className="radio radio-success"
                                         />
                                         <label htmlFor={`${player}-win`} className="text-success">Win</label>
@@ -106,8 +126,8 @@ export default function ScoreForm(
                                             id={`${player}-lose`}
                                             name={`${player}-result`}
                                             value="lose"
-                                            checked={scores[player].result === "lose"}
-                                            onChange={(e) => handleResultChange(player, e.target.value)}
+                                            checked={scores[`player${index + 1}` as keyof Scores].result === "lose"}
+                                            onChange={(e) => handleResultChange(`player${index + 1}` as keyof Scores, e.target.value)}
                                             className="radio radio-error"
                                         />
                                         <label htmlFor={`${player}-lose`} className="text-error">Lose</label>
@@ -118,8 +138,8 @@ export default function ScoreForm(
                                         type="number"
                                         id={`${player}Score`}
                                         name={`${player}Score`}
-                                        value={scores[player].score}
-                                        onChange={(e) => handleScoreChange(player, "score", e.target.value)}
+                                        value={scores[`player${index + 1}` as keyof Scores].score}
+                                        onChange={(e) => handleScoreChange(`player${index + 1}` as keyof Scores, "score", Number(e.target.value))}
                                         className="input input-bordered w-full"
                                         required
                                     />

@@ -12,7 +12,7 @@ export default async function GameDetails({
   const { data: { user } } = await supabase.auth.getUser();
 
   // Fetch game data from db
-  const { data: game, error_getgame } = await supabase
+  const { data: game, error: error_getgame } = await supabase
     .from("game")
     .select("*")
     .eq("id", params.gameId);

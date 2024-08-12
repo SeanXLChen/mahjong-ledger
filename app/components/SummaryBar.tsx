@@ -56,8 +56,8 @@ const SummaryBar = async (
 
                 <div className="grid grid-cols-4 gap-4 place-items-center">
                     {["player1", "player2", "player3", "player4"].map((player, index) => {
-                        const playerName = score[`${player}_name`];
-                        const playerTotalScore = score[`${player}_total_score`];
+                        const playerName = score[`${player}_name` as keyof SummaryScore] as string;
+                        const playerTotalScore = score[`${player}_total_score` as keyof SummaryScore] as number;
 
                         return (
                             <section key={index} className='flex flex-col items-center'>
