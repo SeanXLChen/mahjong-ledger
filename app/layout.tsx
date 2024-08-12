@@ -129,9 +129,11 @@ export default function RootLayout({
                       </Link>
                     </li>
                     <li>
-                      <Link href="/signout">
-                        Logout
-                      </Link>
+                      <form action="/auth/signout" method="post">
+                        <button type="submit" className="">
+                          Logout
+                        </button>
+                      </form>
                     </li>
                   </ul>
                 </div>
