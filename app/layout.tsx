@@ -71,7 +71,7 @@ export default function RootLayout({
 
           <section>
 
-            <div className="navbar bg-base-100 shadow-md border-gray-100 rounded-lg mb-3">
+            <div className="navbar bg-base-100 rounded-lg mb-3">
               <div className="navbar-start">
                 <div className="dropdown">
                   <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

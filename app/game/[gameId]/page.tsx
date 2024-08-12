@@ -36,18 +36,20 @@ export default async function GameDetails({
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="text-center font-semibold text-3xl mb-2">
+      <div className="flex justify-between items-center mb-4">
+        <div className="font-semibold text-3xl flex-1">
           Game - {game[0].game_name}
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex-1 flex justify-center">
           <ScoreForm data={game[0]} />
         </div>
 
-        <Link href="/">
-          <button className="btn btn-neutral-content">Back</button>
-        </Link>
+        <div className="flex-1 flex justify-end">
+          <Link href="/">
+            <button className="btn btn-neutral-content">Back</button>
+          </Link>
+        </div>
       </div>
 
       <div>
