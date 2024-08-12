@@ -77,16 +77,9 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
 
     return (
-        <div className="flex flex-col w-11/12 mx-auto min-h-screen relative">
+        <div className="flex flex-col w-2/3 mx-auto min-h-screen relative">
             <div className="container mx-auto p-6 sm:p-12">
-                <div className="flex mx-auto">
-                    <div className="flex justify-between items-center gap-2 min-w-full">
-                        <h1 className="flex text-3xl md:text-6xl font-extrabold mb-6">
-                            My Profile
-                        </h1>
-                    </div>
-                </div>
-                <div className="p-6 rounded-lg shadow-lg">
+                <div className="p-6 rounded-lg shadow-lg bg-base-200">
                     <div className="text-center mb-6">
                         <Avatar
                             uid={user?.id ?? null}
@@ -100,57 +93,57 @@ export default function AccountForm({ user }: { user: User | null }) {
                     </div>
                     <div className="space-y-4">
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email</label>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                             <input
                                 id="email"
                                 type="text"
                                 value={user?.email}
                                 disabled
-                                className="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="input input-bordered w-full"
                             />
                         </div>
                         <div>
-                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-300">Full Name</label>
+                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
                             <input
                                 id="fullName"
                                 type="text"
                                 value={fullname || ''}
                                 onChange={(e) => setFullname(e.target.value)}
-                                className="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="input input-bordered w-full"
                             />
                         </div>
                         <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-300">Username</label>
+                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                             <input
                                 id="username"
                                 type="text"
                                 value={username || ''}
                                 onChange={(e) => setUsername(e.target.value)}
-                                className="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="input input-bordered w-full"
                             />
                         </div>
                         <div>
-                            <label htmlFor="website" className="block text-sm font-medium text-gray-300">Website</label>
+                            <label htmlFor="website" className="block text-sm font-medium text-gray-700">Website</label>
                             <input
                                 id="website"
                                 type="url"
                                 value={website || ''}
                                 onChange={(e) => setWebsite(e.target.value)}
-                                className="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="input input-bordered w-full"
                             />
                         </div>
                         <div className="mt-6 flex space-x-4">
                             <button
-                                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition"
+                                className="btn btn-primary w-1/2"
                                 onClick={() => updateProfile({ fullname, username, website, avatar_url })}
                                 disabled={loading}
                             >
                                 {loading ? 'Loading ...' : 'Update'}
                             </button>
-                            <form action="/signout" method="post" className="w-full">
+                            <form action="/signout" method="post" className="w-1/2">
                                 <button
                                     type="submit"
-                                    className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition"
+                                    className="btn btn-error w-full"
                                 >
                                     Sign out
                                 </button>
