@@ -25,7 +25,7 @@ export default function EditGame({ game }: { game: Game }) {
         player4: game.player4_name
     })
 
-    const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
     const [loading, setLoading] = useState(false);
 
