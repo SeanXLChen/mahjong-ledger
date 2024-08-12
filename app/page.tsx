@@ -4,14 +4,13 @@ import GameForm from './components/GameForm'
 import EditGame from './components/EditGame'
 import { deleteGame } from './server-action/deleteGame'
 import Link from 'next/link'
+import AvatarWrap from './components/AvatarWrap'
 
 const GameListPage = async () => {
     const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser();
 
-    // console.log({ user })
-
-    // fetch games data from db
+    // Fetch games data from the database
     const { data: games, error } = await supabase
         .from('game')
         .select('*')
@@ -23,87 +22,84 @@ const GameListPage = async () => {
         return <div>Error fetching games</div>
     }
 
-    console.log({ games })
-
     return (
-        <div className="relative z-10">
+        <>
+
+        <div className="relative">
             {/* Game Form */}
-            <div className="relative z-50">
+            <div className="mb-4">
                 <GameForm />
             </div>
 
             {/* Game List */}
-            <div className="relative z-0">
-                {games.length !== 0 ? <></> : <div>You Don't have any game history</div>}
-                {games?.map((game) => (
-                    <div className='p-4 m-2 rounded-lg shadow-lg bg-base-300 '>
-                        <div className='flex justify-between'>
-                            <p className='w-1/3'></p>
-                            <h1 className="text-2xl mb-2 text-center w-1/3">{game.game_name}</h1>
-                            <p className="text-center w-1/3">{new Date(game.created_at).toLocaleString()}</p>
+            <div>
+                {games.length === 0 ? (
+                    <div>You don't have any game history</div>
+                ) : (
+                    <div className="space-y-2">
+                        {games.map((game) => (
+                            <div
+                                key={game.id}
+                                className="flex items-center justify-between p-4 rounded-lg shadow-lg bg-base-300"
+                            >
+                                {/* Game Name */}
+                                <h1 className="text-xl font-semibold w-1/6 truncate">
+                                    {game.game_name}
+                                </h1>
 
-                        </div>
-
-                        <div key={game.id} className="grid grid-cols-4 gap-4 place-items-center">
-
-                            <section className='flex flex-col items-center'>
-                                <div className="avatar placeholder">
-                                    <div className="bg-neutral text-neutral-content w-16 rounded-full ring-primary ring-offset-base-100 ring ring-offset-2">
-                                        <div className="text-xl">{game.player1_name.substring(0, 4)}</div>
-                                    </div>
+                                {/* Players' Information */}
+                                <div className="space-x-2 w-2/6 hidden lg:flex lg:gap-1">
+                                    {["player1_name", "player2_name", "player3_name", "player4_name"].map(
+                                        (player, index) => (
+                                            <div
+                                                key={index}
+                                                className="flex flex-col items-center"
+                                            >
+                                                <div className="avatar placeholder">
+                                                    <div className="bg-neutral text-neutral-content w-12 h-12 rounded-md ring-neutral ring-offset-base-100 ring ring-offset-2 flex items-center justify-center">
+                                                        <span className="text-lg">
+                                                            {game[player].substring(0, 2)}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    )}
                                 </div>
-                            </section>
 
-                            <section className='flex flex-col items-center'>
-                                <div className="avatar placeholder">
-                                    <div className="bg-neutral text-neutral-content w-16 rounded-full ring-primary ring-offset-base-100 ring ring-offset-2">
-                                        <div className="text-xl">{game.player2_name.substring(0, 4)}</div>
-                                    </div>
-                                </div>
-                            </section>
+                                {/* Game Creation Time */}
+                                <p className="text-center text-sm w-1/6 hidden sm:block">
+                                    {new Date(game.created_at).toLocaleString()}
+                                </p>
 
-                            <section className='flex flex-col items-center'>
-                                <div className="avatar placeholder">
-                                    <div className="bg-neutral text-neutral-content w-16 rounded-full ring-primary ring-offset-base-100 ring ring-offset-2">
-                                        <div className="text-xl">{game.player3_name.substring(0, 4)}</div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section className='flex flex-col items-center'>
-                                <div className="avatar placeholder">
-                                    <div className="bg-neutral text-neutral-content w-16 rounded-full ring-primary ring-offset-base-100 ring ring-offset-2">
-                                        <div className="text-xl">{game.player4_name.substring(0, 4)}</div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <div className='col-span-4 flex justify-center gap-2 mt-4'>
-                                {/* View game detail */}
-                                <Link href={`/game/${game.id}`} className="btn btn-success btn-sm">Track</Link>
-
-                                {/* EditGame component */}
-                                <EditGame game={game} />
-
-                                {/* Delete button */}
-                                <form action={deleteGame}>
-                                    <input type="hidden" name="id" value={game.id} />
-                                    <button
-                                        type="submit"
-                                        className="btn btn-sm btn-error"
+                                {/* Action Buttons */}
+                                <div className="flex space-x-2 w-1/6 justify-end">
+                                    <Link
+                                        href={`/game/${game.id}`}
+                                        className="btn btn-success btn-sm"
                                     >
-                                        Delete
-                                    </button>
-                                </form>
+                                        Track
+                                    </Link>
+
+                                    <EditGame game={game} />
+
+                                    <form action={deleteGame}>
+                                        <input type="hidden" name="id" value={game.id} />
+                                        <button
+                                            type="submit"
+                                            className="btn btn-sm btn-error"
+                                        >
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-
-                        </div>
+                        ))}
                     </div>
-                ))}
-
+                )}
             </div>
-
         </div>
+        </>
     )
 }
 

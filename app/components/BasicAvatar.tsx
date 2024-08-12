@@ -42,11 +42,16 @@ export default function BasicAvatar({ user }: { user: User | null }) {
 
     return (
 
+                        <>
+                        <section className="">
+
                         <AvatarBase
                             uid={user?.id ?? null}
                             url={avatar_url}
                             size={50}
                         />
+                        </section>
+                        </>
                     
     )
 }

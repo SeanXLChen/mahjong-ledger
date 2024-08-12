@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import Link from "next/link";
+import AvatarWrap from "./components/AvatarWrap";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -68,6 +69,78 @@ export default function RootLayout({
             <h1 className="text-3xl md:text-5xl font-extrabold mb-6 object-center">Mahjong Scorer</h1>
           </Link> */}
 
+          <section>
+
+            <div className="navbar bg-base-100 shadow-md border-gray-100 rounded-lg mb-3">
+              <div className="navbar-start">
+                <div className="dropdown">
+                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li>
+                      <Link href="/">
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/about">
+                        About
+                      </Link>
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="navbar-center">
+                <Link href="/" className="flex justify-center items-center">
+                  <h1 className="text-2xl md:text-4xl font-extrabold flex justify-center items-center">Mahjong Scorer</h1>
+                </Link>
+              </div>
+              <div className="navbar-end">
+
+
+
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                    <div className="w-13 rounded-full">
+                      <AvatarWrap />
+                    </div>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li>
+                      <Link href="/profile">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/signout">
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+
+          </section>
 
         </header>
         <main className="container mx-auto px-6 sm:px-12 py-2">
