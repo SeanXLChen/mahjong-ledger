@@ -3,7 +3,7 @@
 Mahjong Ledger is a web application designed to simplify the process of tracking scores during family Mahjong games. Initially developed to avoid the hassle of transferring money via WeChat after each round (and to avoid any potential issues with the authorities), this app provides an easy way for players to keep score and track their game history.
 
 ## Link
-Deployed on ![vercel](https://mahjong-ledger-git-main-seanxlchens-projects.vercel.app/)
+Deployed on [vercel](https://mahjong-ledger-git-main-seanxlchens-projects.vercel.app/)
 
 ## Features
 
